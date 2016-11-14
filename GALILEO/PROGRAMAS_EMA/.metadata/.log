@@ -1,0 +1,15 @@
+!SESSION 2016-11-13 17:35:29.186 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=es_AR
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-11-13 17:36:37.501
+!MESSAGE Indexed 'Medidas_T_P_H_dV' (1 sources, 0 headers) in 0,318 sec: 3 declarations; 20 references; 3 unresolved inclusions; 0 syntax errors; 16 unresolved names (41%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2016-11-13 17:36:39.363
+!MESSAGE Indexed 'Medidas_T_P_H_dV' (1 sources, 68 headers) in 0,413 sec: 2.676 declarations; 3.456 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.rse.core 1 0 2016-11-13 17:36:43.490
+!MESSAGE Saved passwords are not available for migration to secure storage. Deprecated authorization classes (org.eclipse.core.runtime.compatibility.auth) are not installed.

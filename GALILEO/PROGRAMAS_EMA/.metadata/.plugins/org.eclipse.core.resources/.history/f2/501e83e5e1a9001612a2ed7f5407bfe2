@@ -1,0 +1,245 @@
+
+#include "mraa.h"
+#include "Medidas_definiciones.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <time.h>
+
+//---------Definiciones-------
+
+
+mraa_uart_context uart;
+mraa_gpio_context m_gpio;
+
+int main(){
+
+	FILE *fs_temp,*fs_hum,*fs_pres,*fs_dirV;
+
+	time_t t;
+
+	struct variables_climaticas variable;
+
+	struct tm *tm;
+
+	creacion_directorios();
+
+	//se habren los archivos
+
+	fs_temp = fopen("/EMA/Temperatura/temperatura.txt","a+");	//abre el .txt, si no existe lo crea
+	fs_hum = fopen("/EMA/Humedad/humedad.txt","a+");
+	fs_pres = fopen("/EMA/Presion/presion.txt","a+");
+	fs_dirV = fopen("/EMA/Direccion_Viento/direccion_viento.txt","a+");
+
+	//------------------------
+
+	m_gpio = mraa_gpio_init(M485PIN);
+
+	int i;
+
+	char buffer;
+
+    i=inicializar_uart();
+
+    if (i!=0)
+    	return EXIT_FAILURE;
+
+
+    Temp_Read(&buffer,&variable.temperatura);	//Se lee la temperatura
+
+    Hum_Read(&buffer,&variable.humedad);		//Se lee la humedad
+
+    Pres_Read(&buffer,&variable.presion);	//Se lee la presion
+
+    dirViento_Read(&buffer,&variable.dirViento);
+
+	t=time(NULL);
+	tm=localtime(&t);
+	strftime(variable.fechayhora, 100, "%d/%m/%Y--%H:%M:%S", tm);
+
+	//Se guardan los datos
+
+	fprintf(fs_temp,"%f--%s \n",variable.temperatura,variable.fechayhora);
+	fprintf(fs_hum,"%f--%s \n",variable.humedad,variable.fechayhora);
+	fprintf(fs_pres,"%f--%s \n",variable.presion,variable.fechayhora);
+	fprintf(fs_dirV,"%d--%s \n",variable.dirViento,variable.fechayhora);
+
+	//--------------------
+
+   printf("Temperatura: %f ºC\n", variable.temperatura);
+   printf("Humedad: %f %\n", variable.humedad);
+   printf("Presion: %f hP\n", variable.presion);
+   printf("Direccion del viento: %d\n", variable.dirViento);
+
+   //Se cierran los archivos
+
+   fclose(fs_temp);
+   fclose(fs_hum);
+   fclose(fs_pres);
+   fclose(fs_dirV);
+
+   //-----------------------
+
+
+    finalizar_uart();
+
+
+    return EXIT_SUCCESS;
+}
+
+
+
+int inicializar_uart(){
+
+		uart = mraa_uart_init(0);
+		mraa_uart_set_baudrate(uart,9600);
+		mraa_uart_set_mode(uart, 8, MRAA_UART_PARITY_NONE, 1);
+		if (uart == NULL) {
+			printf( "UART failed to setup\n");
+			return EXIT_FAILURE;
+		}
+		return 0;
+}
+
+void finalizar_uart(){
+    mraa_uart_stop(uart);
+    mraa_deinit();
+}
+
+int comunicacion_arduino(char magnitud,char *p_buffer, int opcion){
+
+    	mraa_boolean_t i=0;
+
+
+    	mraa_gpio_dir (m_gpio, MRAA_GPIO_OUT);
+    	char basura;	//se usa para guardar la basura recibida por la UART
+
+    	if(opcion == EnvReciv){	//envia y recibe
+    		//mraa_gpio_write(m_gpio,1);
+    		//usleep(5000);
+    		*p_buffer= magnitud;
+    		mraa_uart_write(uart, p_buffer, sizeof(p_buffer));
+    		//mraa_gpio_write(m_gpio,0);
+    		//usleep(50000);
+    		mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+    		//mraa_uart_read(uart, &basura, sizeof(&basura));
+    		mraa_uart_flush(uart);
+    		//while(i==0){
+    		//	i=mraa_uart_data_available(uart,50);	//controla si hay dato disponible
+    		 //   mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+    		  //  mraa_uart_read(uart, &basura, sizeof(&basura));
+  			//}
+    	}
+    	if(opcion == SoloEnv){	//Solo envia
+    		mraa_gpio_write(m_gpio,1);
+    		usleep(5000);
+    		*p_buffer = magnitud;
+    		mraa_uart_write(uart, p_buffer, sizeof(p_buffer));
+    		mraa_gpio_write(m_gpio,0);
+    	}
+    	if (opcion == SoloRec){	//Solo recibe
+    		mraa_gpio_write(m_gpio,0);
+    		mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+    		mraa_uart_read(uart, &basura, sizeof(&basura));
+
+    		//while(i==0){
+    		//	i=mraa_uart_data_available(uart,50);	//controla si hay dato disponible
+    		//    mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+    		//    mraa_uart_read(uart, &basura, sizeof(&basura));
+  			//}
+    	}
+
+    	if(opcion == Borrar){
+    		while(mraa_uart_data_available(uart,5)){
+    			mraa_uart_read(uart, &basura, sizeof(&basura));
+    		}
+    	}
+    	return EXIT_SUCCESS;
+}
+
+/*
+ * Envia la directiva al arduino para que lea la temperatura. Recibe el dato del ad como tipo char
+ * entonces debe convertirlo a temperatura.
+ * Se envía un 0 para que el Arduino obtenga la temperatura y la envíe.
+ *
+ */
+void Temp_Read(char *p_buffer,float *p_temperatura){
+	comunicacion_arduino(Temp, p_buffer, SoloEnv);
+	usleep(10000);
+	comunicacion_arduino(Temp, p_buffer, SoloRec);
+	*p_temperatura = (float)((int)(*p_buffer)*500)/1023.0;
+	comunicacion_arduino(0, p_buffer, Borrar);
+}
+/*
+ * Envia la directiva al arduino para que lea la humedad. Recibe la parte entera y la parte decimal
+ * Se envía un 1 para que el Arduino obtenga la humedad y la envíe.
+ *
+ */
+void Hum_Read(char *p_buffer, float *p_humedad){
+
+
+	float registro;
+
+	comunicacion_arduino(Hum,p_buffer,SoloEnv);
+	sleep(1);
+
+	comunicacion_arduino(Hum,p_buffer,SoloRec);
+	*p_humedad = (float)((int)*p_buffer); //almacena el resultado en humedad
+
+	comunicacion_arduino(Hum,p_buffer,SoloRec);
+	registro = (float)((int)*p_buffer);
+
+	*p_humedad = *p_humedad + registro/100;
+
+	comunicacion_arduino(0, p_buffer, Borrar);
+
+}
+
+
+void Pres_Read(char *p_buffer,float *p_presion){
+
+
+	comunicacion_arduino(Pres, p_buffer, SoloEnv);	// le indica al arduino que debe medir la presion
+	sleep(1);	//espera que mida
+
+	comunicacion_arduino(Pres, p_buffer, SoloRec);//le el dato recibido
+	*p_presion = (float)(((int)(*p_buffer))*10000);
+	//printf("%c",*p_buffer);
+	comunicacion_arduino(Pres,p_buffer,SoloRec);
+	*p_presion = *p_presion + (float)(((int)(*p_buffer))*100);
+	//printf("%c",*p_buffer);
+	comunicacion_arduino(Pres, p_buffer, SoloRec);
+	*p_presion = *p_presion + (float)(*p_buffer);
+	//printf("%c	\n",*p_buffer);
+
+	*p_presion = *p_presion/100.0; //Presion en hectopascales
+
+	comunicacion_arduino(0, p_buffer, Borrar);
+}
+
+
+void dirViento_Read(char *p_buffer, int *p_dirViento){
+	comunicacion_arduino(dirVnto,p_buffer, SoloEnv);
+	usleep(100000);
+	comunicacion_arduino(dirVnto,p_buffer, SoloRec);
+	*p_dirViento = (int) *p_buffer;
+
+		if(*p_dirViento>SE && *p_dirViento<NE) *p_dirViento=E;  // E
+	    if(*p_dirViento>S && *p_dirViento<E) *p_dirViento=SE;    // SE
+	    if(*p_dirViento>SO && *p_dirViento<SE) *p_dirViento=S;  // S
+	    if(*p_dirViento>O && *p_dirViento<S) *p_dirViento=SO;    // SO
+	    if(*p_dirViento>NO && *p_dirViento<SO) *p_dirViento=O;  // O
+	    if(*p_dirViento>N && *p_dirViento<O) *p_dirViento=NO;    // NO
+	    if(*p_dirViento>NE && *p_dirViento<NO) *p_dirViento=N;  // N
+	    if(*p_dirViento>E && *p_dirViento<N) *p_dirViento=NE;    // NE
+
+}
+
+
+void creacion_directorios(){
+
+	system("mkdir -p /EMA/Temperatura");
+	system("mkdir -p /EMA/Humedad");
+	system("mkdir -p /EMA/Presion");
+	system("mkdir -p /EMA/Direccion_Viento");
+}

@@ -1,0 +1,15 @@
+17:46:24 **** Incremental Build of configuration Debug for project Medidas_T_P_H_dV ****
+Info: Internal Builder is used for build
+i586-poky-linux-gcc -I/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux/usr/include/mraa -O0 -g3 -Wall -c -fmessage-length=0 --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -m32 -march=i586 -c -ffunction-sections -fdata-sections -o src/Medidas_T_P_H_dV.o ../src/Medidas_T_P_H_dV.c 
+../src/Medidas_T_P_H_dV.c: In function 'main':
+../src/Medidas_T_P_H_dV.c:71:4: warning: unknown conversion type character 0xa in format [-Wformat=]
+    printf("Humedad: %f %\n", variable.humedad);
+    ^
+../src/Medidas_T_P_H_dV.c: In function 'comunicacion_arduino':
+../src/Medidas_T_P_H_dV.c:112:21: warning: unused variable 'i' [-Wunused-variable]
+      mraa_boolean_t i=0;
+                     ^
+i586-poky-linux-gcc --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -lmraa -o Medidas_T_P_H_dV src/Medidas_T_P_H_dV.o 
+
+17:46:25 Build Finished (took 318ms)
+

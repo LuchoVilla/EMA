@@ -1,0 +1,76 @@
+/*
+ * EMA_UART.c
+ *
+ *  Created on: 13/11/2016
+ *      Author: luciano
+ */
+
+mraa_uart_context uart;
+
+int inicializar_uart(){
+
+		uart = mraa_uart_init(0);
+		mraa_uart_set_baudrate(uart,9600);
+		mraa_uart_set_mode(uart, 8, MRAA_UART_PARITY_NONE, 1);
+		if (uart == NULL) {
+			printf( "UART failed to setup\n");
+			return EXIT_FAILURE;
+		}
+		return 0;
+}
+
+void finalizar_uart(){
+    mraa_uart_stop(uart);
+    mraa_deinit();
+}
+
+int comunicacion_arduino(char magnitud,char *p_buffer, int opcion){
+
+    	mraa_boolean_t i=0;
+
+
+    	mraa_gpio_dir (m_gpio, MRAA_GPIO_OUT);
+    	char basura;	//se usa para guardar la basura recibida por la UART
+
+    	if(opcion == EnvReciv){	//envia y recibe
+    		//mraa_gpio_write(m_gpio,1);
+    		//usleep(5000);
+    		*p_buffer= magnitud;
+    		mraa_uart_write(uart, p_buffer, sizeof(p_buffer));
+    		//mraa_gpio_write(m_gpio,0);
+    		//usleep(50000);
+    		mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+    		//mraa_uart_read(uart, &basura, sizeof(&basura));
+    		mraa_uart_flush(uart);
+    		//while(i==0){
+    		//	i=mraa_uart_data_available(uart,50);	//controla si hay dato disponible
+    		 //   mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+    		  //  mraa_uart_read(uart, &basura, sizeof(&basura));
+  			//}
+    	}
+    	if(opcion == SoloEnv){	//Solo envia
+    		mraa_gpio_write(m_gpio,1);
+    		usleep(5000);
+    		*p_buffer = magnitud;
+    		mraa_uart_write(uart, p_buffer, sizeof(p_buffer));
+    		mraa_gpio_write(m_gpio,0);
+    	}
+    	if (opcion == SoloRec){	//Solo recibe
+    		mraa_gpio_write(m_gpio,0);
+    		mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+    		mraa_uart_read(uart, &basura, sizeof(&basura));
+
+    		//while(i==0){
+    		//	i=mraa_uart_data_available(uart,50);	//controla si hay dato disponible
+    		//    mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+    		//    mraa_uart_read(uart, &basura, sizeof(&basura));
+  			//}
+    	}
+
+    	if(opcion == Borrar){
+    		while(mraa_uart_data_available(uart,5)){
+    			mraa_uart_read(uart, &basura, sizeof(&basura));
+    		}
+    	}
+    	return EXIT_SUCCESS;
+}

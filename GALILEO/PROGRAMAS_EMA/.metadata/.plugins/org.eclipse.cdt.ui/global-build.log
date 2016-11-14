@@ -1,0 +1,229 @@
+17:36:38 **** Rebuild of configuration Debug for project Medidas_T_P_H_dV ****
+Info: Internal Builder is used for build
+i586-poky-linux-gcc -I/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux/usr/include/mraa -O0 -g3 -Wall -c -fmessage-length=0 --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -m32 -march=i586 -c -ffunction-sections -fdata-sections -o src/Medidas_T_P_H_dV.o ../src/Medidas_T_P_H_dV.c 
+i586-poky-linux-gcc --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -lmraa -o Medidas_T_P_H_dV src/Medidas_T_P_H_dV.o 
+17:38:18 **** Incremental Build of configuration Debug for project Medidas_T_P_H_dV ****
+Info: Internal Builder is used for build
+i586-poky-linux-gcc -I/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux/usr/include/mraa -O0 -g3 -Wall -c -fmessage-length=0 --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -m32 -march=i586 -c -ffunction-sections -fdata-sections -o src/Medidas_T_P_H_dV.o ../src/Medidas_T_P_H_dV.c 
+../src/Medidas_T_P_H_dV.c: In function 'main':
+../src/Medidas_T_P_H_dV.c:114:4: warning: unknown conversion type character 0xa in format [-Wformat=]
+    printf("Humedad: %f %\n", variable.humedad);
+    ^
+../src/Medidas_T_P_H_dV.c: In function 'comunicacion_arduino':
+../src/Medidas_T_P_H_dV.c:155:21: warning: unused variable 'i' [-Wunused-variable]
+      mraa_boolean_t i=0;
+                     ^
+i586-poky-linux-gcc --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -lmraa -o Medidas_T_P_H_dV src/Medidas_T_P_H_dV.o 
+17:40:43 **** Incremental Build of configuration Debug for project Medidas_T_P_H_dV ****
+Info: Internal Builder is used for build
+i586-poky-linux-gcc -I/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux/usr/include/mraa -O0 -g3 -Wall -c -fmessage-length=0 --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -m32 -march=i586 -c -ffunction-sections -fdata-sections -o src/Medidas_T_P_H_dV.o ../src/Medidas_T_P_H_dV.c 
+../src/Medidas_T_P_H_dV.c:3:34: fatal error: Medidas_definiciones.h: No such file or directory
+ #include <Medidas_definiciones.h>
+                                  ^
+compilation terminated.
+17:41:25 **** Incremental Build of configuration Debug for project Medidas_T_P_H_dV ****
+Info: Internal Builder is used for build
+i586-poky-linux-gcc -I/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux/usr/include/mraa -O0 -g3 -Wall -c -fmessage-length=0 --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -m32 -march=i586 -c -ffunction-sections -fdata-sections -o src/Medidas_T_P_H_dV.o ../src/Medidas_T_P_H_dV.c 
+../src/Medidas_T_P_H_dV.c: In function 'main':
+../src/Medidas_T_P_H_dV.c:70:4: warning: unknown conversion type character 0xa in format [-Wformat=]
+    printf("Humedad: %f %\n", variable.humedad);
+    ^
+../src/Medidas_T_P_H_dV.c: In function 'comunicacion_arduino':
+../src/Medidas_T_P_H_dV.c:111:21: warning: unused variable 'i' [-Wunused-variable]
+      mraa_boolean_t i=0;
+                     ^
+i586-poky-linux-gcc --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -lmraa -o Medidas_T_P_H_dV src/Medidas_T_P_H_dV.o 
+17:44:02 **** Incremental Build of configuration Debug for project Medidas_T_P_H_dV ****
+Info: Internal Builder is used for build
+i586-poky-linux-gcc -I/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux/usr/include/mraa -O0 -g3 -Wall -c -fmessage-length=0 --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -m32 -march=i586 -c -ffunction-sections -fdata-sections -o src/EMA_UART.o ../src/EMA_UART.c 
+../src/EMA_UART.c: In function 'inicializar_uart':
+../src/EMA_UART.c:11:3: error: 'uart' undeclared (first use in this function)
+   uart = mraa_uart_init(0);
+   ^
+../src/EMA_UART.c:11:3: note: each undeclared identifier is reported only once for each function it appears in
+../src/EMA_UART.c:11:3: warning: implicit declaration of function 'mraa_uart_init' [-Wimplicit-function-declaration]
+../src/EMA_UART.c:12:3: warning: implicit declaration of function 'mraa_uart_set_baudrate' [-Wimplicit-function-declaration]
+   mraa_uart_set_baudrate(uart,9600);
+   ^
+../src/EMA_UART.c:13:3: warning: implicit declaration of function 'mraa_uart_set_mode' [-Wimplicit-function-declaration]
+   mraa_uart_set_mode(uart, 8, MRAA_UART_PARITY_NONE, 1);
+   ^
+../src/EMA_UART.c:13:31: error: 'MRAA_UART_PARITY_NONE' undeclared (first use in this function)
+   mraa_uart_set_mode(uart, 8, MRAA_UART_PARITY_NONE, 1);
+                               ^
+../src/EMA_UART.c:14:15: error: 'NULL' undeclared (first use in this function)
+   if (uart == NULL) {
+               ^
+../src/EMA_UART.c:15:4: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+    printf( "UART failed to setup\n");
+    ^
+../src/EMA_UART.c:15:4: warning: incompatible implicit declaration of built-in function 'printf'
+../src/EMA_UART.c:16:11: error: 'EXIT_FAILURE' undeclared (first use in this function)
+    return EXIT_FAILURE;
+           ^
+../src/EMA_UART.c: In function 'finalizar_uart':
+../src/EMA_UART.c:22:5: warning: implicit declaration of function 'mraa_uart_stop' [-Wimplicit-function-declaration]
+     mraa_uart_stop(uart);
+     ^
+../src/EMA_UART.c:22:20: error: 'uart' undeclared (first use in this function)
+     mraa_uart_stop(uart);
+                    ^
+../src/EMA_UART.c:23:5: warning: implicit declaration of function 'mraa_deinit' [-Wimplicit-function-declaration]
+     mraa_deinit();
+     ^
+../src/EMA_UART.c: In function 'comunicacion_arduino':
+../src/EMA_UART.c:28:6: error: unknown type name 'mraa_boolean_t'
+      mraa_boolean_t i=0;
+      ^
+../src/EMA_UART.c:31:6: warning: implicit declaration of function 'mraa_gpio_dir' [-Wimplicit-function-declaration]
+      mraa_gpio_dir (m_gpio, MRAA_GPIO_OUT);
+      ^
+../src/EMA_UART.c:31:21: error: 'm_gpio' undeclared (first use in this function)
+      mraa_gpio_dir (m_gpio, MRAA_GPIO_OUT);
+                     ^
+../src/EMA_UART.c:31:29: error: 'MRAA_GPIO_OUT' undeclared (first use in this function)
+      mraa_gpio_dir (m_gpio, MRAA_GPIO_OUT);
+                             ^
+../src/EMA_UART.c:34:19: error: 'EnvReciv' undeclared (first use in this function)
+      if(opcion == EnvReciv){ //envia y recibe
+                   ^
+../src/EMA_UART.c:38:7: warning: implicit declaration of function 'mraa_uart_write' [-Wimplicit-function-declaration]
+       mraa_uart_write(uart, p_buffer, sizeof(p_buffer));
+       ^
+../src/EMA_UART.c:38:23: error: 'uart' undeclared (first use in this function)
+       mraa_uart_write(uart, p_buffer, sizeof(p_buffer));
+                       ^
+../src/EMA_UART.c:41:7: warning: implicit declaration of function 'mraa_uart_read' [-Wimplicit-function-declaration]
+       mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+       ^
+../src/EMA_UART.c:43:7: warning: implicit declaration of function 'mraa_uart_flush' [-Wimplicit-function-declaration]
+       mraa_uart_flush(uart);
+       ^
+../src/EMA_UART.c:50:19: error: 'SoloEnv' undeclared (first use in this function)
+      if(opcion == SoloEnv){ //Solo envia
+                   ^
+../src/EMA_UART.c:51:7: warning: implicit declaration of function 'mraa_gpio_write' [-Wimplicit-function-declaration]
+       mraa_gpio_write(m_gpio,1);
+       ^
+../src/EMA_UART.c:52:7: warning: implicit declaration of function 'usleep' [-Wimplicit-function-declaration]
+       usleep(5000);
+       ^
+../src/EMA_UART.c:57:20: error: 'SoloRec' undeclared (first use in this function)
+      if (opcion == SoloRec){ //Solo recibe
+                    ^
+../src/EMA_UART.c:69:19: error: 'Borrar' undeclared (first use in this function)
+      if(opcion == Borrar){
+                   ^
+../src/EMA_UART.c:70:7: warning: implicit declaration of function 'mraa_uart_data_available' [-Wimplicit-function-declaration]
+       while(mraa_uart_data_available(uart,5)){
+       ^
+../src/EMA_UART.c:74:13: error: 'EXIT_SUCCESS' undeclared (first use in this function)
+      return EXIT_SUCCESS;
+             ^
+../src/EMA_UART.c:28:21: warning: unused variable 'i' [-Wunused-variable]
+      mraa_boolean_t i=0;
+                     ^
+../src/EMA_UART.c:75:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+17:45:01 **** Incremental Build of configuration Debug for project Medidas_T_P_H_dV ****
+Info: Internal Builder is used for build
+i586-poky-linux-gcc -I/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux/usr/include/mraa -O0 -g3 -Wall -c -fmessage-length=0 --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -m32 -march=i586 -c -ffunction-sections -fdata-sections -o src/EMA_UART.o ../src/EMA_UART.c 
+../src/EMA_UART.c:8:1: error: unknown type name 'mraa_uart_context'
+ mraa_uart_context uart;
+ ^
+../src/EMA_UART.c: In function 'inicializar_uart':
+../src/EMA_UART.c:12:3: warning: implicit declaration of function 'mraa_uart_init' [-Wimplicit-function-declaration]
+   uart = mraa_uart_init(0);
+   ^
+../src/EMA_UART.c:13:3: warning: implicit declaration of function 'mraa_uart_set_baudrate' [-Wimplicit-function-declaration]
+   mraa_uart_set_baudrate(uart,9600);
+   ^
+../src/EMA_UART.c:14:3: warning: implicit declaration of function 'mraa_uart_set_mode' [-Wimplicit-function-declaration]
+   mraa_uart_set_mode(uart, 8, MRAA_UART_PARITY_NONE, 1);
+   ^
+../src/EMA_UART.c:14:31: error: 'MRAA_UART_PARITY_NONE' undeclared (first use in this function)
+   mraa_uart_set_mode(uart, 8, MRAA_UART_PARITY_NONE, 1);
+                               ^
+../src/EMA_UART.c:14:31: note: each undeclared identifier is reported only once for each function it appears in
+../src/EMA_UART.c:15:15: error: 'NULL' undeclared (first use in this function)
+   if (uart == NULL) {
+               ^
+../src/EMA_UART.c:16:4: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+    printf( "UART failed to setup\n");
+    ^
+../src/EMA_UART.c:16:4: warning: incompatible implicit declaration of built-in function 'printf'
+../src/EMA_UART.c:17:11: error: 'EXIT_FAILURE' undeclared (first use in this function)
+    return EXIT_FAILURE;
+           ^
+../src/EMA_UART.c: In function 'finalizar_uart':
+../src/EMA_UART.c:23:5: warning: implicit declaration of function 'mraa_uart_stop' [-Wimplicit-function-declaration]
+     mraa_uart_stop(uart);
+     ^
+../src/EMA_UART.c:24:5: warning: implicit declaration of function 'mraa_deinit' [-Wimplicit-function-declaration]
+     mraa_deinit();
+     ^
+../src/EMA_UART.c: In function 'comunicacion_arduino':
+../src/EMA_UART.c:29:6: error: unknown type name 'mraa_boolean_t'
+      mraa_boolean_t i=0;
+      ^
+../src/EMA_UART.c:32:6: warning: implicit declaration of function 'mraa_gpio_dir' [-Wimplicit-function-declaration]
+      mraa_gpio_dir (m_gpio, MRAA_GPIO_OUT);
+      ^
+../src/EMA_UART.c:32:21: error: 'm_gpio' undeclared (first use in this function)
+      mraa_gpio_dir (m_gpio, MRAA_GPIO_OUT);
+                     ^
+../src/EMA_UART.c:32:29: error: 'MRAA_GPIO_OUT' undeclared (first use in this function)
+      mraa_gpio_dir (m_gpio, MRAA_GPIO_OUT);
+                             ^
+../src/EMA_UART.c:35:19: error: 'EnvReciv' undeclared (first use in this function)
+      if(opcion == EnvReciv){ //envia y recibe
+                   ^
+../src/EMA_UART.c:39:7: warning: implicit declaration of function 'mraa_uart_write' [-Wimplicit-function-declaration]
+       mraa_uart_write(uart, p_buffer, sizeof(p_buffer));
+       ^
+../src/EMA_UART.c:42:7: warning: implicit declaration of function 'mraa_uart_read' [-Wimplicit-function-declaration]
+       mraa_uart_read(uart, p_buffer, sizeof(p_buffer));
+       ^
+../src/EMA_UART.c:44:7: warning: implicit declaration of function 'mraa_uart_flush' [-Wimplicit-function-declaration]
+       mraa_uart_flush(uart);
+       ^
+../src/EMA_UART.c:51:19: error: 'SoloEnv' undeclared (first use in this function)
+      if(opcion == SoloEnv){ //Solo envia
+                   ^
+../src/EMA_UART.c:52:7: warning: implicit declaration of function 'mraa_gpio_write' [-Wimplicit-function-declaration]
+       mraa_gpio_write(m_gpio,1);
+       ^
+../src/EMA_UART.c:53:7: warning: implicit declaration of function 'usleep' [-Wimplicit-function-declaration]
+       usleep(5000);
+       ^
+../src/EMA_UART.c:58:20: error: 'SoloRec' undeclared (first use in this function)
+      if (opcion == SoloRec){ //Solo recibe
+                    ^
+../src/EMA_UART.c:70:19: error: 'Borrar' undeclared (first use in this function)
+      if(opcion == Borrar){
+                   ^
+../src/EMA_UART.c:71:7: warning: implicit declaration of function 'mraa_uart_data_available' [-Wimplicit-function-declaration]
+       while(mraa_uart_data_available(uart,5)){
+       ^
+../src/EMA_UART.c:75:13: error: 'EXIT_SUCCESS' undeclared (first use in this function)
+      return EXIT_SUCCESS;
+             ^
+../src/EMA_UART.c:29:21: warning: unused variable 'i' [-Wunused-variable]
+      mraa_boolean_t i=0;
+                     ^
+../src/EMA_UART.c:76:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+17:46:24 **** Incremental Build of configuration Debug for project Medidas_T_P_H_dV ****
+Info: Internal Builder is used for build
+i586-poky-linux-gcc -I/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux/usr/include/mraa -O0 -g3 -Wall -c -fmessage-length=0 --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -m32 -march=i586 -c -ffunction-sections -fdata-sections -o src/Medidas_T_P_H_dV.o ../src/Medidas_T_P_H_dV.c 
+../src/Medidas_T_P_H_dV.c: In function 'main':
+../src/Medidas_T_P_H_dV.c:71:4: warning: unknown conversion type character 0xa in format [-Wformat=]
+    printf("Humedad: %f %\n", variable.humedad);
+    ^
+../src/Medidas_T_P_H_dV.c: In function 'comunicacion_arduino':
+../src/Medidas_T_P_H_dV.c:112:21: warning: unused variable 'i' [-Wunused-variable]
+      mraa_boolean_t i=0;
+                     ^
+i586-poky-linux-gcc --sysroot=/home/luciano/Descargas/iotdk-ide-linux/./devkit-x86/sysroots/i586-poky-linux -lmraa -o Medidas_T_P_H_dV src/Medidas_T_P_H_dV.o 

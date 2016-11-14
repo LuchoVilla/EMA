@@ -1,0 +1,58 @@
+/*
+ * Medidas_definiciones.h
+ *
+ *  Created on: 13/11/2016
+ *      Author: luciano
+ */
+
+#ifndef MEDIDAS_DEFINICIONES_H_
+#define MEDIDAS_DEFINICIONES_H_
+
+#include "EMA_UART.c"
+
+struct variables_climaticas {
+
+	float temperatura,humedad,presion;
+    int dirViento;
+    char fechayhora[100];
+};
+
+#define Temp '2'
+#define Hum '1'
+#define Pres '3'
+#define dirVnto '4'
+
+#define M485PIN 3
+
+enum {
+	N=10,
+	S=2,
+	E=6,
+	O=14,
+	NE=8,
+	NO=12,
+	SE=4,
+	SO=16
+};
+
+enum {
+	EnvReciv,
+	SoloEnv,
+	SoloRec,
+	Borrar
+};
+//----------------------------
+
+//----Prototipos--------------
+int comunicacion_arduino(char magnitud,char *p_buffer, int opcion);
+void Temp_Read(char *p_buffer,float *p_temperatura);
+void Hum_Read(char *p_buffer,float *p_humedad);
+void Pres_Read(char *p_buffer,float *p_presion);
+void dirViento_Read(char *p_buffer,int *p_dirViento);
+int inicializar_uart(void);
+void finalizar_uart(void);
+void creacion_directorios(void);
+
+//----------------------------
+
+#endif /* MEDIDAS_DEFINICIONES_H_ */
